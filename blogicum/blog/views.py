@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-# Create your views here.
 posts = [
     {
         'id': 0,
@@ -47,13 +46,19 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    context = {'list': reversed(posts)}  # для обратного порядка reversed здесь?
+    context = {'list': posts[::-1]}
     return render(request, template, context)
 
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    context = {'post': posts[id]}  # pk вместо id, т.к. получаю определенный словарь по индексу (недоганяю распаковку словаря)
+    requested_post = None
+    for post in posts:
+        if post["id"] == id:
+            requested_post = post
+    if not requested_post:
+        return redirect("blog:index")
+    context = {'post': requested_post}
     return render(request, template, context)
 
 

@@ -4,32 +4,32 @@
 {% endblock title %}
 {% block content %}
 <h1>Лента записей</h1>
-  <hr>
-    {% for ribbon in list %}<!-- могу ли укзать полный путь обращения к словарю context[list]? -->
-    <article>
-      <ul>
-        <li>
-          Место: {{ ribbon.location }} <!-- Почему через точку разве не через скобку обращаются в словаре? -->
-        </li>
-        <li>
-          Дата: {{ ribbon.date }}
-        </li>
-        <li>
-          Категория:
-          <a
-            href="{% url 'blog:category_posts' ribbon.category %}"
-          >
-            {{ ribbon.category }}
-          </a>
-        </li>
-      </ul>
-      <p>
-        {{ ribbon.text|truncatewords:10 }}
-      </p>
-      <a href="{% url 'blog:post_detail' ribbon.id %}">Читать полный текст</a>
-    </article>
-    {% if not forloop.last %}
-      <hr>
-    {% endif %}
-    {% endfor %}
-    {% endblock %}
+<hr>
+{% for post in list %}
+<article>
+  <ul>
+    <li>
+      Место: {{ post.location }}
+    </li>
+    <li>
+      Дата: {{ post.date }}
+    </li>
+    <li>
+      Категория:
+      <a
+        href="{% url 'blog:category_posts' post.category %}"
+      >
+        {{ post.category }}
+      </a>
+    </li>
+  </ul>
+  <p>
+    {{ post.text|truncatewords:10 }}
+  </p>
+  <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+</article>
+{% if not forloop.last %}
+<hr>
+{% endif %}
+{% endfor %}
+{% endblock %}

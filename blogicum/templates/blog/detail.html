@@ -3,28 +3,20 @@
   {{ post.location }}. {{ post.date }}
 {% endblock %}
 {% block content %}
-  <article>
-    <ul>
-      <li>
-        Место: {{ post.location }}
-      </li>
-      <li>
-        Дата: {{ post.date }}
-      </li>
-      <li>
-        Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
-      </li>
-    </ul>
-      <p>
-        {{ post.text }}
-      </p>
-  </article>
+<article>
+  <ul>
+    <li>
+      Место: {{ post.location }}
+    </li>
+    <li>
+      Дата: {{ post.date }}
+    </li>
+    <li>
+      Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
+    </li>
+  </ul>
+    <p>
+      {{ post.text|linebreaks }}
+    </p>
+</article>
 {% endblock %}
-
-<!--Всю ночь и весь день шел дождь и дул сильный <br>
-  порывистый ветер. 25 октября.  Корабль за ночь разбило <br>
-  в щепки; на том месте, где он стоял, торчат какие-то <br>
-  жалкие обломки,  да и те видны только во время отлива. <br>
-  Весь этот день я хлопотал  около вещей: укрывал и <br>
-  укутывал их, чтобы не испортились от дождя.
--->
